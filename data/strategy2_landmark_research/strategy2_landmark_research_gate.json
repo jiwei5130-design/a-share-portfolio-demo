@@ -1,0 +1,198 @@
+{
+  "research_version": "STRATEGY2_LANDMARK_RESEARCH_GATE_V1.0",
+  "strategy_effect": "RESEARCH_ONLY_DOES_NOT_CHANGE_STRATEGY2",
+  "research_gate": "PARTIALLY_SUPPORTED",
+  "research_stage": "Research Gate",
+  "as_of": "2026-09-13",
+  "line": "strategy2_key_price_landmark",
+  "positioning": "实验性研究 / 研究中的策略方向；不是已发布策略，不是自动交易，不构成荐股。",
+  "v1_0_note": "Strategy2 v1.0 箱体震荡为独立研究线：NOT_AVAILABLE / MECHANISM_NOT_SUPPORTED（研究归档，v1.x Entry 重构线永久停止）。本页仅汇总关键价格地标研究线，不代表 v1.0 状态变化。",
+  "statuses": [
+    {
+      "key": "L",
+      "label": "L 关键价格地标定义",
+      "status": "FROZEN",
+      "status_label": "已冻结",
+      "note": "结构定义（最近一次明确下降过程 → 最后摆动低点 → 止跌 → higher high 确认）；不是 N 日最低价；landmark_confirmation_date 显式隔离未来确认。"
+    },
+    {
+      "key": "L_REVISIT",
+      "label": "L Revisit",
+      "status": "SUPPORTED_AS_RESEARCH_PHENOMENON",
+      "status_label": "存在可重复研究现象",
+      "note": "价格重新回到 L±1% 后存在可重复的研究现象；不是策略有效性结论。"
+    },
+    {
+      "key": "ABSORPTION",
+      "label": "承接强度（HIGH / MID / LOW）",
+      "status": "PARTIALLY_SUPPORTED",
+      "status_label": "部分支持",
+      "note": "HIGH 有一定优势，但梯度并非单调（MID 最弱）；LOW 与 HIGH 构成方向相反的两极证据。"
+    },
+    {
+      "key": "LOW_BELOW_L",
+      "label": "low_below_L（日内是否跌破 L）",
+      "status": "INCONCLUSIVE_CONDITIONAL",
+      "status_label": "条件性 / 证据不足",
+      "note": "信息价值主要出现在 LOW / MID 承接强度环境；HIGH 内没有明显额外信息。"
+    },
+    {
+      "key": "CROSS_TIME",
+      "label": "跨时间稳定性",
+      "status": "NOT_CONFIRMED",
+      "status_label": "未确认",
+      "note": "2020–2021 方向不稳定/反向；2022–2025 部分研究结果较稳定；2024–2026 部分方向成立。"
+    },
+    {
+      "key": "CROSS_STOCK",
+      "label": "跨股票 / 市场稳定性",
+      "status": "NOT_CONFIRMED",
+      "status_label": "稳定性未确认",
+      "note": "股票前后半样本方向不完全一致；GEM 部分支持；SH_MAIN 存在反向结果。"
+    },
+    {
+      "key": "EXIT",
+      "label": "退出方式稳健性",
+      "status": "EXIT_SENSITIVE",
+      "status_label": "退出方式敏感",
+      "note": "不同退出方式下结果并不完全一致；不能选择一个最优退出方式来包装结果。"
+    },
+    {
+      "key": "PROTOTYPE",
+      "label": "收益原型验证",
+      "status": "PARTIALLY_SUPPORTED",
+      "status_label": "部分支持",
+      "note": "L Revisit 相对普通 1% 回调存在小幅优势；HIGH 在部分退出方式下表现更好；不存在稳定、单调、跨时间、跨市场的一致优势。"
+    },
+    {
+      "key": "PRODUCTION",
+      "label": "生产交易策略",
+      "status": "NOT_READY",
+      "status_label": "未就绪",
+      "note": "未创建 V1.1；未定义正式买卖规则；未接入自动交易。"
+    }
+  ],
+  "core_conclusions": [
+    {"label": "L Revisit", "value": "存在可重复研究现象"},
+    {"label": "承接强度 HIGH", "value": "部分支持（梯度非单调）"},
+    {"label": "low_below_L", "value": "条件性 / 证据不足"},
+    {"label": "跨时间", "value": "不稳定"},
+    {"label": "跨股票", "value": "稳定性未确认"},
+    {"label": "退出方式", "value": "EXIT-SENSITIVE"}
+  ],
+  "return_validation": [
+    {
+      "label": "L Revisit vs Control",
+      "value": "存在小幅优势",
+      "detail": "4/5 种既有研究性退出平均净收益更高（REBOUND_SWING 除外）；中位数与最大单笔亏损更优；优势幅度有限。"
+    },
+    {
+      "label": "HIGH vs Baseline",
+      "value": "部分退出方式支持",
+      "detail": "TIME_5 / TIME_20 / L_INVALID 支持；TIME_10 与 REBOUND_SWING 不支持；不选择“最佳退出”。"
+    }
+  ],
+  "disclaimers": [
+    "不是收益保证",
+    "不是实盘策略",
+    "未形成 V1.1"
+  ],
+  "risk": {
+    "statistical_synthetic": {
+      "label": "STATISTICAL SYNTHETIC CURVE — NOT PORTFOLIO RISK",
+      "method": "按退出日等权平均交易收益并复利计算；无资金、仓位、并发与现金约束，不是真实组合风险。",
+      "examples": {
+        "HIGH / TIME_20": -0.7742,
+        "L Revisit / TIME_20": -0.9968
+      }
+    },
+    "portfolio_simulation": {
+      "label": "组合模拟最大回撤（Baseline Portfolio 研究假设）",
+      "assumptions": "初始资金 1,000,000 / 单笔 100,000 / 最大 10 仓；Equity = Cash + Market Value；每日收盘 MTM；同日顺序：退出 → 释放现金 → T+1 买入 → 收盘 MTM。",
+      "examples": {
+        "HIGH / TIME_20": -0.2315,
+        "L Revisit / TIME_20": -0.4007,
+        "HIGH / REBOUND_SWING": -0.5416
+      },
+      "note": "依赖特定资金、仓位、并发与退出假设；不是 Strategy2 正式资金管理规则。"
+    },
+    "max_single_loss": {
+      "value": -0.5119,
+      "source": "Strategy2 v1.0 箱体线 Artifact（150,368 笔）",
+      "note": "无固定百分比止损，跳空/连续下跌穿越结构位；不是 L Revisit 线结果（该线最大单笔 −41.12%）；不能套用 Strategy1 的 −5.16% 止损结论。"
+    }
+  },
+  "evidence": [
+    {
+      "id": "definition",
+      "title": "L 定义验证",
+      "status": "FROZEN",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_DEFINITION_STUDY.md",
+      "summary": "结构定义与案例验证；landmark_confirmation_date 隔离未来确认；未引入 N 日最低价/ATR/ZigZag。"
+    },
+    {
+      "id": "revisit",
+      "title": "L Revisit 事件研究",
+      "status": "PARTIALLY_SUPPORTED",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_REVISIT_STUDY.md",
+      "summary": "1,428 个 revisit；T+1～T+20 优于无条件基准与普通 1% 回调；入场效应成立、退出规则未建立。"
+    },
+    {
+      "id": "behavior",
+      "title": "行为分类研究",
+      "status": "PARTIALLY_SUPPORTED",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_REVISIT_BEHAVIOR_STUDY.md",
+      "summary": "QUICK_REBOUND / BREAK_AND_RECOVER / BREAK_CONTINUE 结构分离；HOLD_NEAR_L 为 0（INCONCLUSIVE）。"
+    },
+    {
+      "id": "observable",
+      "title": "T 日可见特征研究",
+      "status": "SUPPORTED",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_REVISIT_OBSERVABLE_FEATURE_STUDY.md",
+      "summary": "T 日收盘承接强度簇与后续行为方向一致；历史类/量比类特征无结构价值。"
+    },
+    {
+      "id": "independence",
+      "title": "特征冗余与独立性研究",
+      "status": "SUPPORTED",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_FEATURE_INDEPENDENCE_STUDY.md",
+      "summary": "close_rel_L / close_loc / body_rel / lower_wick 为同一承接强度簇；close_above_L / zone 为机械阈值化；low_below_L 部分独立。"
+    },
+    {
+      "id": "robustness",
+      "title": "时间 / 股票稳健性研究",
+      "status": "PARTIALLY_SUPPORTED",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_OBSERVABLE_ROBUSTNESS_STUDY.md",
+      "summary": "2022–2025 稳定；2020–2021 证据不足；股票半样本与主要市场方向一致；low_below_L 为条件性信息。"
+    },
+    {
+      "id": "condition",
+      "title": "候选条件收敛研究",
+      "status": "CONVERGENCE_COMPLETED",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_CONDITION_CANDIDATE_STUDY.md",
+      "summary": "承接强度维度（HIGH/LOW 两极）进入下一轮候选；low_below_L 家族全部 INCONCLUSIVE；单变量与内部分区 REJECT。"
+    },
+    {
+      "id": "prototype",
+      "title": "首次原型回测",
+      "status": "PARTIALLY_SUPPORTED",
+      "file": "STRATEGY2_KEY_PRICE_LANDMARK_PROTOTYPE_BACKTEST.md",
+      "summary": "L 相对普通 1% 回调小幅优势；HIGH 在各研究性退出下优于基线；MID 最弱（非单调）；回撤为统计合成曲线。"
+    },
+    {
+      "id": "second_round",
+      "title": "第二轮收益 / 交易稳健性验证",
+      "status": "PARTIALLY_SUPPORTED",
+      "file": "STRATEGY2_SECOND_ROUND_RETURN_ROBUSTNESS_STUDY.md",
+      "summary": "跨退出 / 跨时间 / 跨股票均不完全稳定（EXIT-SENSITIVE）；真实组合模拟最大回撤 HIGH/TIME_20 −23.15%。"
+    }
+  ],
+  "boundaries": [
+    "未创建 V1.1",
+    "未优化参数",
+    "未定义正式交易规则",
+    "未建立 candidate ranking",
+    "未进行自动交易",
+    "不构成荐股"
+  ]
+}

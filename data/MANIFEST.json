@@ -1,0 +1,34 @@
+{
+ "database": "market_data.db",
+ "original_size": 379887616,
+ "original_sha256": "03fb7b21ad4c5c420b848e7e361290a962defa6bb2fb3343e616260ca9458531",
+ "chunk_size": 75977524,
+ "chunks": [
+  {
+   "name": "market_data.db.part00",
+   "size": 75977524,
+   "sha256": "83670a14c774d212838f436c8bf98ebb08d45fc20a6b1f8ca44455e05b3c4053"
+  },
+  {
+   "name": "market_data.db.part01",
+   "size": 75977524,
+   "sha256": "12ba907de9bfd4566cadabae7bbcd0535eced4150a8d1d99da1a84cdf0d9209b"
+  },
+  {
+   "name": "market_data.db.part02",
+   "size": 75977524,
+   "sha256": "93d35b25085a673945cec263dde2f7b702f86256837c6546d4206c530b0073ff"
+  },
+  {
+   "name": "market_data.db.part03",
+   "size": 75977524,
+   "sha256": "d965701fa459df9c9f8eab29c7a132aa85c9448821b0129b3d6b544a1e37db9e"
+  },
+  {
+   "name": "market_data.db.part04",
+   "size": 75977520,
+   "sha256": "22f07f7aa40dd33a4f045da066f2828d26d643689f7f2d9cd035d927bef98488"
+  }
+ ],
+ "note": "chunks are a byte-exact split of the Online Dataset V1 SQLite; reassembled file must match original_sha256"
+}

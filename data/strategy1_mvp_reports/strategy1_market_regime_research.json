@@ -1,0 +1,121 @@
+{
+  "research_version": "STRATEGY1_MARKET_REGIME_RESEARCH_V1.0",
+  "market_regime_version": "MARKET_REGIME_V1.0",
+  "assignment_basis": "Market Regime on Strategy1 signal date T; never uses T+1/T+2 state.",
+  "strategy_effect": "RESEARCH_ONLY_DOES_NOT_CHANGE_STRATEGY1",
+  "signal_count": 30122,
+  "trade_count": 6049,
+  "regime_dates": 1611,
+  "missing_trade_signal_date": 0,
+  "signals_without_regime": 0,
+  "trades_without_regime": 0,
+  "overall": {
+    "trade_count": 6049,
+    "win_rate": 0.5645561249793354,
+    "average_net_return": 0.013787101373303006,
+    "median_net_return": 0.008744827586207,
+    "average_win": 0.0500917034999245,
+    "average_loss": -0.03328207716216108,
+    "profit_loss_ratio": 1.5050654217241748,
+    "max_drawdown": -0.6252905865068068
+  },
+  "by_regime": [
+    {
+      "state": "STRONG",
+      "state_label": "强势",
+      "signal_count": 2217,
+      "executed_trade_rate": 0.14930085701398285,
+      "trade_count": 331,
+      "win_rate": 0.39274924471299094,
+      "average_net_return": -0.0007990351999771731,
+      "median_net_return": -0.0112237970253717,
+      "average_win": 0.04885212457126659,
+      "average_loss": -0.03291172559928906,
+      "profit_loss_ratio": 1.4843379884135237,
+      "max_drawdown": -0.2783979514975171
+    },
+    {
+      "state": "MODERATELY_STRONG",
+      "state_label": "偏强",
+      "signal_count": 9250,
+      "executed_trade_rate": 0.14151351351351352,
+      "trade_count": 1309,
+      "win_rate": 0.5744843391902216,
+      "average_net_return": 0.016643230688430447,
+      "median_net_return": 0.0098204139900071,
+      "average_win": 0.05202788617827002,
+      "average_loss": -0.031129230583309877,
+      "profit_loss_ratio": 1.6713514983619635,
+      "max_drawdown": -0.4267145111719689
+    },
+    {
+      "state": "RANGE_BOUND",
+      "state_label": "震荡",
+      "signal_count": 7759,
+      "executed_trade_rate": 0.1674184817631138,
+      "trade_count": 1299,
+      "win_rate": 0.5434949961508853,
+      "average_net_return": 0.013721723343835096,
+      "median_net_return": 0.0062881319469343,
+      "average_win": 0.05333327033589647,
+      "average_loss": -0.03343806110202549,
+      "profit_loss_ratio": 1.5949869274168484,
+      "max_drawdown": -0.41909329302157516
+    },
+    {
+      "state": "MODERATELY_WEAK",
+      "state_label": "偏弱",
+      "signal_count": 8291,
+      "executed_trade_rate": 0.2809070075986009,
+      "trade_count": 2329,
+      "win_rate": 0.6195792185487333,
+      "average_net_return": 0.015462105386930398,
+      "median_net_return": 0.0140959933911606,
+      "average_win": 0.045006534381762914,
+      "average_loss": -0.03265596576379568,
+      "profit_loss_ratio": 1.3782025222374465,
+      "max_drawdown": -0.42416919428749444
+    },
+    {
+      "state": "WEAK",
+      "state_label": "弱势",
+      "signal_count": 1873,
+      "executed_trade_rate": 0.3032568072610785,
+      "trade_count": 568,
+      "win_rate": 0.4894366197183099,
+      "average_net_return": 0.012458173091167297,
+      "median_net_return": -0.0014034591194968,
+      "average_win": 0.06594066021953786,
+      "average_loss": -0.03881124560430516,
+      "profit_loss_ratio": 1.6990091194657084,
+      "max_drawdown": -0.524375049506368
+    },
+    {
+      "state": "INSUFFICIENT_DATA",
+      "state_label": "数据不足",
+      "signal_count": 732,
+      "executed_trade_rate": 0.29098360655737704,
+      "trade_count": 213,
+      "win_rate": 0.49765258215962443,
+      "average_net_return": 0.004528936627047718,
+      "median_net_return": -0.0002559139784947,
+      "average_win": 0.043945276800567576,
+      "average_loss": -0.03451902653550467,
+      "profit_loss_ratio": 1.2730740467251445,
+      "max_drawdown": -0.22839347888951733
+    }
+  ],
+  "ranking_by_average_net_return_min_100_trades": [
+    "MODERATELY_STRONG",
+    "MODERATELY_WEAK",
+    "RANGE_BOUND",
+    "WEAK",
+    "STRONG"
+  ],
+  "limitations": [
+    "This is historical conditional performance, not a prediction or automatic strategy recommendation.",
+    "Strategy1 lacks point-in-time historical ST/*ST and market-cap filters.",
+    "Regime groups are observational and do not prove causality.",
+    "Max drawdown is recalculated within each regime subset and is not a deployable portfolio curve."
+  ]
+}

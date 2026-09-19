@@ -1,0 +1,84 @@
+{
+  "report_name": "Strategy1 MVP Demo Dataset Build Report",
+  "status": "PASS",
+  "database_path": "D:\\隔日战法\\data\\market_data.db",
+  "dataset_path": "D:\\隔日战法\\data\\market_data_reports\\strategy1_demo_dataset.csv",
+  "started_at": "2026-09-08T14:00:28.761815+00:00",
+  "completed_at": "2026-09-08T14:03:36.012744+00:00",
+  "elapsed_seconds": 187.251,
+  "output_columns": [
+    "code",
+    "date",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "amount",
+    "MA5",
+    "MA20",
+    "ma5_distance",
+    "20_day_high",
+    "pressure_distance",
+    "trend_state"
+  ],
+  "row_count": 7771164,
+  "security_count": 5730,
+  "first_date": "2020-02-07",
+  "last_date": "2026-08-25",
+  "market_coverage": {
+    "BSE": {
+      "security_count": 313,
+      "row_count": 237304
+    },
+    "GEM": {
+      "security_count": 1436,
+      "row_count": 1876761
+    },
+    "SH_MAIN": {
+      "security_count": 1785,
+      "row_count": 2615389
+    },
+    "STAR": {
+      "security_count": 613,
+      "row_count": 701956
+    },
+    "SZ_MAIN": {
+      "security_count": 1583,
+      "row_count": 2339754
+    }
+  },
+  "trend_state_counts": {
+    "ABOVE_MA5": 1019067,
+    "ABOVE_MA5_2D": 2673528,
+    "BELOW_OR_EQUAL_MA5": 4078569
+  },
+  "source_state": {
+    "stock_basic_count": 5884,
+    "stocks_with_raw_daily": 5751,
+    "raw_market_daily_rows": 7886127,
+    "non_raw_market_daily_rows": 0
+  },
+  "indicator_definitions": {
+    "MA5": "5-record rolling mean of close, including current record",
+    "MA20": "20-record rolling mean of close, including current record",
+    "ma5_distance": "(close - MA5) / MA5",
+    "20_day_high": "maximum high of the prior 20 trading records, excluding current record",
+    "pressure_distance": "(20_day_high - close) / close",
+    "trend_state": {
+      "ABOVE_MA5_2D": "current and previous close are above their respective MA5",
+      "ABOVE_MA5": "current close is above MA5 but the two-day condition is false",
+      "BELOW_OR_EQUAL_MA5": "current close is below or equal to MA5"
+    }
+  },
+  "eligibility_rule": "Rows require non-NULL MA5, MA20 and prior-20-record high; therefore each included security needs at least 21 RAW records.",
+  "checkpoint_scope": "Only P1 market_daily_full_history checkpoints with status=COMMITTED are included.",
+  "temporary_mvp_omissions": {
+    "historical_market_cap_filter": "NOT_APPLIED_DATA_UNAVAILABLE",
+    "historical_st_filter": "NOT_APPLIED_DATA_UNAVAILABLE"
+  },
+  "strategy_core_modified": false,
+  "strategy_engine_modified": false,
+  "exit_engine_modified": false,
+  "web_modified": false
+}
