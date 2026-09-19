@@ -2,6 +2,8 @@
 
 所有数字来自只读 API；未新增算法/指标。研发口径与数据边界不在本页展示。
 Online Dataset V1 适配：日期选择器窗口 250 → 120 个交易日（与线上数据窗口一致）。
+降级路径：Regime 历史（全站最重端点）失败/超时时，回退到 market_overview 的真实
+宽度历史日期，保证选择器仍可切换多个真实交易日（不写死、不伪造日期）。
 """
 
 import pandas as pd
@@ -9,6 +11,7 @@ import streamlit as st
 
 from portfolio_demo.api_client import (
     ApiError,
+    market_overview,
     market_regime_history,
     overview,
     sector_overview,
@@ -21,10 +24,29 @@ except ApiError as exc:
     st.error(str(exc), icon=":material/error:")
     st.stop()
 
+
+def _breadth_history_dates(fallback_date: str) -> list[str]:
+    """降级路径：用真实 API 返回的市场宽度历史日期作为选择器日期列表。"""
+    try:
+        market = market_overview(fallback_date)
+    except ApiError:
+        return [fallback_date]
+    dates = sorted(
+        {str(row["date"]) for row in market["breadth"]["history"] if row.get("date")},
+        reverse=True,
+    )
+    if fallback_date not in dates:
+        dates.insert(0, fallback_date)
+    return dates or [fallback_date]
+
+
 try:
-    trading_dates = [item["date"] for item in market_regime_history(None, 120)["items"]][::-1]
+    regime_dates = [str(item["date"]) for item in market_regime_history(None, 120)["items"]]
 except ApiError:
-    trading_dates = [latest_date]
+    regime_dates = []
+trading_dates = sorted(set(regime_dates), reverse=True)
+if len(trading_dates) < 2:
+    trading_dates = _breadth_history_dates(latest_date)
 
 st.write("观察行业表现、活跃度与板块轮动特征。")
 
