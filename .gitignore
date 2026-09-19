@@ -8,3 +8,4 @@ venv/
 .DS_Store
 data/*.restoring
 data/market_data.db
+data/api_subprocess.log

@@ -52,15 +52,22 @@ def _stock_names() -> dict[str, str]:
 def _cache_is_current() -> bool:
     """Online Dataset V1: the 1.13 GB dataset CSV is not shipped online.
 
-    The pre-built signal cache is the runtime source; the dataset CSV only takes
-    part in the freshness comparison when it is actually present (research env).
+    Online mode (dataset CSV absent): the pre-built signal cache is the single
+    source of truth and cannot be rebuilt, so its presence alone counts as
+    current. File mtimes are deliberately NOT consulted here, because a fresh
+    git checkout assigns checkout-time mtimes in path order, which would make
+    the cache look "stale" and wrongly trigger a rebuild.
+
+    Research mode (dataset CSV present): keep the original mtime comparison.
     """
+    if not DATASET_PATH.exists():
+        return SIGNAL_CACHE_PATH.exists()
     if not SIGNAL_CACHE_PATH.exists():
         return False
-    references = [SIGNAL_REPORT_PATH.stat().st_mtime]
-    if DATASET_PATH.exists():
-        references.append(DATASET_PATH.stat().st_mtime)
-    return SIGNAL_CACHE_PATH.stat().st_mtime >= max(references)
+    return SIGNAL_CACHE_PATH.stat().st_mtime >= max(
+        DATASET_PATH.stat().st_mtime,
+        SIGNAL_REPORT_PATH.stat().st_mtime,
+    )
 
 
 def build_signal_cache(force: bool = False) -> dict[str, object]:
@@ -76,6 +83,11 @@ def build_signal_cache(force: bool = False) -> dict[str, object]:
             signal_keys.add((row["股票"].zfill(6), row["日期"]))
 
     if not DATASET_PATH.exists():
+        if not SIGNAL_CACHE_PATH.exists():
+            raise RuntimeError(
+                "ONLINE_DATASET_V1: signal cache is missing and the full dataset CSV is "
+                "intentionally not part of the online dataset; the cache cannot be rebuilt."
+            )
         raise RuntimeError(
             "ONLINE_DATASET_V1: signal cache rebuild requires the full dataset CSV, "
             "which is intentionally not part of the online dataset. Keep the pre-built cache."
